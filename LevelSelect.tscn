@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/fonts/main_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/images/background/card_back.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/ui/btn_level1.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/ui/btn_level2.png" type="Texture" id=4]
+[ext_resource path="res://scripts/LevelSelect.gd" type="Script" id=5]
+[ext_resource path="res://assets/images/ui/btn_level3.png" type="Texture" id=6]
+
+[node name="LevelSelect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 150.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="TitleLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -230.0
+margin_top = -356.0
+margin_right = 142.0
+margin_bottom = -296.0
+rect_rotation = -0.0360166
+custom_colors/font_color = Color( 0.92549, 0.882353, 0.882353, 1 )
+custom_colors/font_outline_modulate = Color( 0.968627, 0.952941, 0.952941, 1 )
+custom_colors/font_color_shadow = Color( 0.996078, 0.988235, 0.988235, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "LEVEL SELECT"
+align = 1
+valign = 1
+
+[node name="Level1Button" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -255.0
+margin_right = 410.0
+margin_bottom = 245.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture_normal = ExtResource( 3 )
+expand = true
+
+[node name="Level2Button" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -115.0
+margin_right = 410.0
+margin_bottom = 385.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+expand = true
+script = ExtResource( 5 )
+
+[node name="Level3Button" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = 25.0
+margin_right = 410.0
+margin_bottom = 525.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture_normal = ExtResource( 6 )
+expand = true
+
+[connection signal="pressed" from="Level1Button" to="Level2Button" method="_on_Level1Button_pressed"]
+[connection signal="pressed" from="Level2Button" to="Level2Button" method="_on_Level2Button_pressed"]
+[connection signal="pressed" from="Level3Button" to="Level2Button" method="_on_Level3Button_pressed"]

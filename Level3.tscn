@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/fonts/main_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/images/background/card_back.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Level2.gd" type="Script" id=3]
+[ext_resource path="res://assets/images/ui/btn_exit.png" type="Texture" id=4]
+
+[node name="Level3" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 150.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="TitleLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -230.0
+margin_top = -356.0
+margin_right = 142.0
+margin_bottom = -296.0
+rect_rotation = -0.0360166
+custom_colors/font_color = Color( 0.92549, 0.882353, 0.882353, 1 )
+custom_colors/font_outline_modulate = Color( 0.968627, 0.952941, 0.952941, 1 )
+custom_colors/font_color_shadow = Color( 0.996078, 0.988235, 0.988235, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "LEVEL 3"
+align = 1
+valign = 1
+
+[node name="ExitButton" type="TextureButton" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -200.0
+margin_bottom = -250.0
+rect_scale = Vector2( 0.2, 0.2 )
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 4 )
+
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
