@@ -1,50 +1,68 @@
-# res://Scripts/Components/Card.gd
-extends Area2D
+extends TextureButton
 
-# Kartın ID'si (eşleşmeyi kontrol etmek için)
-export var card_id = ""
+signal card_clicked(card)  # Level1’e haber vereceğimiz sinyal
 
-# Kart durumları (Kapalı, Açık, Eşleşti)
-enum State {CLOSED, OPENED, MATCHED}
-var current_state = State.CLOSED
+# Inspector’dan ayarladığın resimler
+export(Texture) var front_texture  # ön yüz
+export(Texture) var back_texture   # arka yüz
 
-# Düğümlere erişim için Godot 3.x syntax'ı
-onready var card_front = get_node("CardFront")
-onready var card_back = get_node("CardBack")
+var is_open := false      # şu anda açık mı?
+var is_matched := false   # eşleşmiş kart mı?
 
-# Oyun yöneticisine göndermek için sinyal
-signal card_flipped
 
-# Kartın ön yüz resmini ayarlar
-func set_card_texture(texture):
-	card_front.texture = texture
+func _ready():
+	# Oyun başında kartların hepsi kapalı olsun
+	show_back()
 
-# Kartı Açma
-func flip():
-	if current_state == State.CLOSED:
-		current_state = State.OPENED
-		card_front.visible = true
-		card_back.visible = false
-		# Sinyali tetikle (self'i argüman olarak gönder)
-		emit_signal("card_flipped", self)
 
-# Kartı Kapatma (Eşleşmediğinde)
-func close():
-	if current_state == State.OPENED:
-		current_state = State.CLOSED
-		card_front.visible = false
-		card_back.visible = true
+func _pressed():
+	# Eşleşmiş kart tekrar tıklanmasın
+	if is_matched:
+		return
 
-# Kartı Eşleşti Olarak İşaretleme
-func match():
-	current_state = State.MATCHED
+	# Zaten açıksa tekrar kendi kendine kapanmasın,
+	# kapanma işini Level1 yapacak
+	if is_open:
+		return
 
-# Tıklama algılama (Area2D'nin 'input_event' sinyaline bağlanmalıdır!)
-func _on_Card_input_event(viewport, event, shape_idx):
-	# Farenin sol tuşu basılıysa
-	if event is InputEventMouseButton and event.pressed and event.button_index == BUTTON_LEFT:
-		if current_state == State.CLOSED:
-			flip()
+	# Parent Level scriptinden kontrol et: 2'den fazla kart açık mı?
+	var parent_level = null
+	var current = get_parent()
+	# CardsGrid'den Level scriptine ulaş
+	while current != null:
+		if current.has_method("can_open_card"):
+			parent_level = current
+			break
+		current = current.get_parent()
+	
+	if parent_level != null:
+		if not parent_level.can_open_card():
+			return
 
-# NOT: Card.tscn sahnenizin Card (Area2D) düğümünden
-# 'input_event' sinyalini alıp bu _on_Card_input_event() fonksiyonuna bağlamanız GEREKİR.
+	flip_open()
+	emit_signal("card_clicked", self)
+
+
+func show_back():
+	is_open = false
+	if back_texture:
+		texture_normal = back_texture
+
+
+func flip_open():
+	is_open = true
+	if front_texture:
+		texture_normal = front_texture
+
+
+func flip_close():
+	# Eşleşmiş kartları kapatmayalım
+	if is_matched:
+		return
+	show_back()
+
+
+func set_matched():
+	# Artık bu kart bulundu, açık kalsın, tıklanmasın
+	is_matched = true
+	disabled = true

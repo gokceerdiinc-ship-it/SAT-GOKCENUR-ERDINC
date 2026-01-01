@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/fonts/main_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/images/background/card_back.png" type="Texture" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://assets/images/ui/btn_level2.png" type="Texture" id=4]
 [ext_resource path="res://scripts/LevelSelect.gd" type="Script" id=5]
 [ext_resource path="res://assets/images/ui/btn_level3.png" type="Texture" id=6]
+[ext_resource path="res://assets/fonts/myfont.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/levels/ScrollingBar.gd" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 21
+font_data = ExtResource( 7 )
 
 [node name="LevelSelect" type="Control"]
 anchor_right = 1.0
@@ -77,6 +83,25 @@ margin_bottom = 525.0
 rect_scale = Vector2( 0.3, 0.3 )
 texture_normal = ExtResource( 6 )
 expand = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="ScrollingBar" type="Control" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -50.0
+margin_bottom = 28.0
+rect_clip_content = true
+script = ExtResource( 8 )
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/ScrollingBar"]
+margin_top = 35.0
+margin_right = 700.0
+margin_bottom = 65.0
+custom_fonts/font = SubResource( 1 )
+text = "GÖKÇENUR ERDİNÇ"
 
 [connection signal="pressed" from="Level1Button" to="Level2Button" method="_on_Level1Button_pressed"]
 [connection signal="pressed" from="Level2Button" to="Level2Button" method="_on_Level2Button_pressed"]

@@ -14,6 +14,15 @@ config/name="HAFIZA KARTI OYUNU"
 run/main_scene="res://scenes/ui/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=700
+window/size/height=750
+window/size/borderless=true
+window/size/fullscreen=true
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

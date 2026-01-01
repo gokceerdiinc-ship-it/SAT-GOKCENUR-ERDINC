@@ -3,9 +3,9 @@
 [ext_resource path="res://scripts/cards/Card.gd" type="Script" id=1]
 
 [node name="Card" type="TextureButton"]
-margin_right = 100.0
+margin_right = 120.0
 margin_bottom = 150.0
-rect_min_size = Vector2( 130, 170 )
+rect_min_size = Vector2( 120, 140 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 expand = true
