@@ -1,4 +1,3 @@
-PROJE ADI
 Hafıza Kartı Oyunu
 <img width="1915" height="1199" alt="oyun-goruntusu" src="https://github.com/user-attachments/assets/2e195547-fb4c-4b9b-af82-966b23aa2186" />
 
@@ -38,6 +37,7 @@ GELİŞTİRME ORTAMI
 
 NOT
 Bu proje eğitim amaçlı geliştirilmiştir.
+
 
 
 
