@@ -1,6 +1,6 @@
 PROJE ADI
 Hafıza Kartı Oyunu
-![Hafıza Kartı Oyunu](assets/screenshots/oyun-tanitim.png)
+![Hafıza Kartı Oyunu](assets/screenshots/oyun-goruntusu.png)
 
 GELİŞTİREN
 Gökçenur ERDİNÇ
@@ -38,5 +38,6 @@ GELİŞTİRME ORTAMI
 
 NOT
 Bu proje eğitim amaçlı geliştirilmiştir.
+
 
 
